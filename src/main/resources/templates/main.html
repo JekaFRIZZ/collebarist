@@ -5,6 +5,27 @@
     <title>Main</title>
 </head>
 <body>
-  <h1 th:text="${main}"></h1>
+    <nav>
+        <form method="post">
+            <input type="text" name="text" placeholder="Enter message">
+            <input type="text" name="tag" placeholder="Enter tag">
+            <button type="submit">Send</button>
+        </form>
+    </nav>
+    <nav>
+        <form method="post" action="filter">
+            <input type="text" name="filter" placeholder="Enter the desired tag">
+            <button type="submit">Find</button>
+        </form>
+    </nav>
+
+    <nav>
+        <h1>List messages</h1>
+        <th:block th:each="message : ${messages}">
+            <b th:text="${message.id}"></b>
+            <span th:text="${message.text}"></span>
+            <i th:text="${message.tag}"></i>
+        </th:block>
+    </nav>
 </body>
 </html>
