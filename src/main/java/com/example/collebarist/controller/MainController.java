@@ -1,8 +1,10 @@
 package com.example.collebarist.controller;
 
 import com.example.collebarist.domain.Message;
+import com.example.collebarist.domain.User;
 import com.example.collebarist.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +29,14 @@ public class MainController {
         return "main";
     }
 
-    @PostMapping("/main")
-    public String add(@RequestParam String text,
+    @PostMapping("send")
+    public String add(
+            @AuthenticationPrincipal User user,
+            @RequestParam String text,
             @RequestParam String tag,
-            Model model) {
-        Message message = new Message(text, tag);
+            Model model
+    ) {
+        Message message = new Message(text, tag, user);
         messageRepository.save(message);
 
         Iterable<Message> messages = messageRepository.findAll();
