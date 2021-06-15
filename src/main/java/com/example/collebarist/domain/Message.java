@@ -1,4 +1,4 @@
-package com.example.collebarist.entity;
+package com.example.collebarist.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
